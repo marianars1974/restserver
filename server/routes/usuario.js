@@ -5,15 +5,26 @@ const _ = require('underscore');
 
 const Usuario = require('../models/usuario');
 
+const {verifica_token,verificaAdminRole}  = require('../middlewares/autenticacion');
+
+
 const app = express();
 
+//ruta, middleware, callback
+//en midel ware no hace falta pasar parametros, se va ejecutar cuando haga app.input-group-text
+//se tieen que llamar el next para que continue
+app.get('/usuario',verifica_token,(req, res)=> {
 
-app.get('/usuario', function(req, res) {
+    //en req.usuario tieene el usaurio xq paso x verifica token
+   /* return res.json({
+        usuario: req.usuario,
+        nombre: req.usuario.nombre
+    })*/
 
-
-
+//query, parametros con ?
     let desde = req.query.desde || 0;
     desde = Number(desde);
+   // console.log(req);
 
     let limite = req.query.limite || 5;
     limite = Number(limite);
@@ -46,7 +57,7 @@ app.get('/usuario', function(req, res) {
 
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario',[verifica_token,verificaAdminRole] , function(req, res) {
 
     let body = req.body;
 
@@ -78,7 +89,7 @@ app.post('/usuario', function(req, res) {
 
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verifica_token,verificaAdminRole], function(req, res) {
 
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
@@ -103,7 +114,7 @@ app.put('/usuario/:id', function(req, res) {
 
 });
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id',[verifica_token,verificaAdminRole], function(req, res) {
 
 
     let id = req.params.id;

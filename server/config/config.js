@@ -9,6 +9,18 @@ process.env.PORT = process.env.PORT || 3000;
 // ============================
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
+// ============================
+//  secret key SEED SEMILLA AUTOTENCIACION
+// ============================
+process.env.SEED = process.env.SEED || 'este-es-secret-dev';
+
+
+// ============================
+//  VENCIMIENTO TOKENT
+// ============================
+//expira '' * ' * hs * d
+process.env.VENC_TOKEN =  60 * 60 * 24 * 30;
+
 
 // ============================
 //  Base de datos
