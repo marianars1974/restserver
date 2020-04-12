@@ -39,6 +39,43 @@ let verifica_token = (req, res, next) =>
     
 };
 
+//verificaTokenURl
+
+let verificaTokenUrl = (req,res,next)=>
+{
+
+    let token = req.query.token;
+
+    if(token===undefined)
+    {
+        return res.status(401).json(
+            {
+                ok:false,
+                err: {message: "token no enviado"}
+            }
+        )
+    }
+
+    
+    jwt.verify(token, process.env.SEED, (err, decoded)=>{
+
+        if(err)
+        {
+            return res.status(401).json(
+                {
+                    ok:false,
+                    err: {message: "token no valido"}
+                }
+            )
+        }
+        //decoded es el payload (info del usuario)
+        //le asigno a la peticion la info del usuario.
+        req.usuario = decoded.usuario;
+        next();
+
+    });
+}
+
 //verifica admin role
 let verificaAdminRole = (req, res, next)=>
 {
@@ -60,5 +97,6 @@ let verificaAdminRole = (req, res, next)=>
 
 module.exports = {
     verifica_token,
-    verificaAdminRole
+    verificaAdminRole,
+    verificaTokenUrl
 }

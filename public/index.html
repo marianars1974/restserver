@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="681118745867-t0kbv7ppct8bk7da4ja0e10u2h5surbs.apps.googleusercontent.com">
+    <title>google sign in demo</title>
+</head>
+<body>
+  <img src="/imagen/usuarios/5e90b03782e06111949544cd-765.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJVU0VSX1JPTEUiLCJlc3RhZG8iOnRydWUsImdvb2dsZSI6ZmFsc2UsIl9pZCI6IjVlOTBiZmE1NjlmMWJkMDEyMDc5ZjliYiIsIm5vbWJyZSI6Ik1hcmlhbmExMSIsImVtYWlsIjoibXJzZWJlZGlvMTFAZ21haWwuY29tIiwiX192IjowfSwiaWF0IjoxNTg2NjkyMTkzLCJleHAiOjE1ODY2OTQ3ODV9.-agywQL33jAkHruhsCvPsOrTtNVj-HdvYql1Ke06koY" alt="">
+
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+
+    <script>
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+</script>
+</body>
+</html>
